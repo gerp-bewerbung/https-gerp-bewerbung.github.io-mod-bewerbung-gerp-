@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Hamburg GERP Bewerbung</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #1F2937, #111827);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background-color: #2C3E50;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid #7F8C8D;
+      background-color: #34495E;
+      color: white;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .header p {
+      font-size: 1rem;
+      color: #BDC3C7;
+    }
+
+    .social-links {
+      margin-top: 30px;
+    }
+
+    .social-links ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      color: #1ABC9C;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      display: block;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #16A085;
+    }
+  </style>
+</head>
+
+<body class="flex justify-center items-center min-h-screen">
+
+  <!-- Hauptinhalt -->
+  <div class="container">
+    <div class="header">
+      <h2>Mod-Bewerbung – GERP</h2>
+      <p>Fülle das Formular aus, um dich als Moderator zu bewerben.</p>
+    </div>
+
+    <textarea id="motivation" placeholder="Warum möchtest du Mod werden? (roblox name)" required></textarea>
+    <textarea id="experience" placeholder="Welche Erfahrungen bringst du mit?" required></textarea>
+    <input type="email" id="contactEmail" placeholder="Ticket öffnen für Rückmeldung!" required>
+    <button class="btn" onclick="sendModApplication()">Bewerbung absenden</button>
+
+    <div class="social-links">
+      <ul>
+        <li><a href="https://discord.gg/3VX6uSrEUW" target="_blank">Discord</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    async function sendModApplication() {
+      const motivation = document.getElementById('motivation').value.trim();
+      const experience = document.getElementById('experience').value.trim();
+      const contactEmail = document.getElementById('contactEmail').value.trim();
+
+      if (!motivation || !experience || !contactEmail) {
+        alert('Bitte alle Felder ausfüllen.');
+        return;
+      }
+
+      const payload = {
+        content: `🛡️ Neue Mod-Bewerbung:\n\n💬 Motivation: ${motivation}\n📚 Erfahrung: ${experience}\n📧 Kontakt: ${contactEmail}`
+      };
+
+      try {
+        await fetch("https://discord.com/api/webhooks/1367485837465358357/eGROZOHWRZYDpL3IrEAYzsZrZ_aCFBtQmK_97gETJ-wxdC7TIs41loodrLkgF5LRtNBj", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        alert('Bewerbung erfolgreich gesendet!');
+      } catch (err) {
+        console.error(err);
+        alert('Fehler beim Senden der Bewerbung.');
+      }
+    }
+  </script>
+
+</body>
+
+</html>
